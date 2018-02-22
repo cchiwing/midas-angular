@@ -2,7 +2,7 @@
   User Profile Page
 </p>
 
-<div *ngIf="auth.authState else showLogin">
+<div *ngIf="auth.authState else showMessage">
   <h5>User Information</h5>
   <h4>
     <strong>UID:</strong> {{ auth.currentUserId }}
@@ -12,6 +12,6 @@
   </h4>
 </div>
 
-<ng-template #showLogin>
+<ng-template #showMessage>
   <p>Please login.</p>
 </ng-template>
