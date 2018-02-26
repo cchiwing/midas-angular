@@ -1,35 +1,50 @@
+<mat-sidenav-container class="sidenav-container" (backdropClick)="sidenav.close()" >
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <button mat-icon-button (click)="sidenav.toggle()" *ngIf="authService.currentUser">
+          <mat-icon class="nav-icon">menu</mat-icon>
+      </button>
+      
+      <span>Midas Panel</span>
+      <span class="nav-spacer"></span>
+      <mat-icon class="nav-icon">delete</mat-icon>
+      <mat-icon class="nav-icon">more_vert</mat-icon>
+    </mat-toolbar-row>
+  </mat-toolbar>
 
 
-<!--The content below is only a placeholder and can be replaced.-->
-<!-- <div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Auth function test here: </h2>
 
-<div *ngIf="afAuth.authState | async as user; else showLogin">
-  <h1>Hello {{ user.displayName }}!</h1>
-  <button (click)="logout()">Logout</button>
-</div>
-<ng-template #showLogin>
-  <p>Please login.</p>
-  <button (click)="login()">Login with Google</button>
-</ng-template>
+  <router-outlet></router-outlet>
+      
+  <mat-sidenav #sidenav>
 
-<div>
-  <ul>
-    <li>
-      <a href="profile">profile</a>
-    </li>
-  </ul>
-</div> -->
-<!-- {{checkAuth()}} -->
-<app-user-profile></app-user-profile>
+    <mat-card class="profole-container" color="primary">
+      <button class="sidenav-btn" mat-button (click)="sidenav.toggle()" [routerLink]="['/user']">
+        <mat-icon>account_circle</mat-icon><br>
+        {{ (authService.currentUserName).split('@')[0] }}
+      </button>
+      <button class="sidenav-btn" mat-button (click)="logout();sidenav.toggle();" color="accent">Logout</button>
+    </mat-card>
 
-<div *ngIf="authService.currentUser">
-    <button (click)="logout()">Logout</button>
-</div>
-----------------outlet----------------------
-<router-outlet></router-outlet>
+    <div class="item-container">
+      <button mat-button class="sidenav-btn" (click)="sidenav.toggle()" [routerLink]="['/home']">
+        <mat-icon class="color_gray">home</mat-icon>
+        <span class="item-spacer"></span>
+        Home
+      </button>
+      <button mat-button class="sidenav-btn" (click)="sidenav.toggle()" [routerLink]="['/home']">
+        <mat-icon class="color_gray">library_books</mat-icon>
+        <span class="item-spacer"></span>
+        Product
+      </button>
+      <button mat-button class="sidenav-btn" (click)="sidenav.toggle()" [routerLink]="['/home']">
+        <mat-icon>work</mat-icon>
+        <span class="item-spacer"></span>
+        Order</button>
+    </div>
+
+    <div class="sidenav-footer">
+      <!-- <button class="sidenav-btn" mat-button (click)="logout()" color="accent">Logout</button> -->
+    </div>
+  </mat-sidenav>
+</mat-sidenav-container>

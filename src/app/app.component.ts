@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material';
+import { Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { AuthService } from './core/auth.service';
@@ -11,10 +13,19 @@ import { AuthService } from './core/auth.service';
 
 export class AppComponent {
 
-  constructor(public authService: AuthService) { }
+  constructor(public authService: AuthService, private router: Router) { }
   
   logout() {
-    this.authService.signOut();
+    this.authService.signOut().then(() => {
+      this.router.navigate(['']);
+    });
   }  
   
+  // open() {
+  //   this.sidenav.open();
+  // }
+
+  // close(reason: string) {
+  //   this.sidenav.close();
+  // }
 }

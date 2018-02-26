@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../core/auth.service'
+import { FormControl, Validators } from '@angular/forms';
+import { AuthService } from '../../core/auth.service';
 
 @Component({
   selector: 'app-user-login',
@@ -9,6 +10,7 @@ import { AuthService } from '../../core/auth.service'
 })
 export class UserLoginComponent implements OnInit {
 
+  hidepw = true;
   email = '';
   password = '';
   errorMessage = '';
@@ -29,7 +31,7 @@ export class UserLoginComponent implements OnInit {
     console.log('login submit', this.email +' | '+ this.password)
     if(this.validateForm(this.email, this.password)) {
       this.authService.signinWithEmail(this.email, this.password)
-      .then(() => this.router.navigate(['/user']))
+      .then(() => this.router.navigate(['/home']))
       .catch(_error => {
         this.error = _error;
         this.router.navigate(['/']);

@@ -1,1 +1,55 @@
+/* TOOLBAR */
+.nav-icon {
+    margin: 0 4px;
+    padding: 0 0px;
+}
 
+.nav-spacer {
+  flex: 1 1 auto;
+}
+
+.mat-toolbar {
+    top:0;
+}
+
+/* SIDE NAV  */
+.sidenav-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+mat-sidenav {
+    width:200px;
+    background-color: whitesmoke;
+}
+
+.sidenav-btn {
+    margin: 4 4 0 0;
+    width: 100%;
+}
+
+.profole-container {
+    padding: 20px 4px 8px 4px;
+    text-align: center;
+}
+
+.item-container > button {
+    margin: 4px 0 4px 0;
+    text-align: left;
+    color: rgb(90, 90, 90);
+}
+
+.item-spacer{
+    margin-left: 8px;
+}
+
+.sidenav-footer {
+    width: 100%;
+    position: absolute;
+    bottom:0;
+}
