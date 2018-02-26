@@ -21,7 +21,7 @@
     <mat-card class="profole-container" color="primary">
       <button class="sidenav-btn" mat-button (click)="sidenav.toggle()" [routerLink]="['/user']">
         <mat-icon>account_circle</mat-icon><br>
-        {{ (authService.currentUserName).split('@')[0] }}
+        {{ authService.currentUserEmailName }}
       </button>
     </mat-card>
     <mat-card class="profole-container" color="primary">

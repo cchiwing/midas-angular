@@ -31,6 +31,10 @@ export class AuthService {
     return this.authenticated ? this.authState.email : '';
   }
 
+  get currentUserEmailName(): string {
+    return this.authenticated ? (this.authState.email).split('@')[0] : '';
+  }
+
   // Returns current user
   get currentUser(): any {
     return this.authenticated ? this.authState : null;
