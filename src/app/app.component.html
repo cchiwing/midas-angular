@@ -23,7 +23,9 @@
         <mat-icon>account_circle</mat-icon><br>
         {{ (authService.currentUserName).split('@')[0] }}
       </button>
-      <button class="sidenav-btn" mat-button (click)="logout();sidenav.toggle();" color="accent">Logout</button>
+    </mat-card>
+    <mat-card class="profole-container" color="primary">
+      <button class="sidenav-btn" mat-button (click)="logout();sidenav.toggle();">Logout</button>
     </mat-card>
 
     <div class="item-container">
