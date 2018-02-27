@@ -12,7 +12,9 @@
     </mat-toolbar-row>
   </mat-toolbar>
 
-  <router-outlet></router-outlet>
+  <div class="inner-content-view">
+    <router-outlet></router-outlet>
+  </div>
       
   <mat-sidenav #sidenav>
 
@@ -43,8 +45,8 @@
         Work</button>
     </div>
 
-    <div class="sidenav-footer">
-      <!-- <button class="sidenav-btn" mat-button (click)="logout()" color="accent">Logout</button> -->
-    </div>
+    <!-- <div class="stick-bottom">
+      <button class="sidenav-btn" mat-button (click)="logout()" color="accent">Logout</button>
+    </div> -->
   </mat-sidenav>
 </mat-sidenav-container>
