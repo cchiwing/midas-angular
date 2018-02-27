@@ -18,6 +18,7 @@ import { UserProfileComponent } from './users/user-profile/user-profile.componen
 import { HomeComponent } from './home/home.component';
 import { UserSignupComponent } from './users/user-signup/user-signup.component';
 import { OrderListComponent } from './order/order-list/order-list.component';
+import { OrderFormComponent } from './order/order-form/order-form.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { OrderListComponent } from './order/order-list/order-list.component';
     HomeComponent,
     UserSignupComponent,
     OrderListComponent,
+    OrderFormComponent,
   ],
   imports: [
     BrowserModule,

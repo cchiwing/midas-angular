@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { UserSignupComponent } from './users/user-signup/user-signup.component';
 import { OrderListComponent } from './order/order-list/order-list.component';
 import { AuthGuard } from './core/auth.guard';
+import { OrderFormComponent } from './order/order-form/order-form.component';
 
 const routes : Routes =  [
   {path:'', redirectTo:'home', pathMatch:'full'}, 
@@ -15,6 +16,7 @@ const routes : Routes =  [
   {path:'user', component: UserProfileComponent, canActivate: [AuthGuard] },
   {path:'home', component: HomeComponent, canActivate: [AuthGuard] },
   {path:'orderlist', component: OrderListComponent, canActivate: [AuthGuard] },
+  {path:'orderform', component: OrderFormComponent, canActivate: [AuthGuard] },
   
   {path:'**', redirectTo:'home', pathMatch:'full'}
 ];
