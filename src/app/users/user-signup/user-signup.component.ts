@@ -10,8 +10,10 @@ import { AuthService } from '../../core/auth.service'
 })
 export class UserSignupComponent implements OnInit {
 
+  hidepw = true;
   email = '';
   password = '';
+  confirm = '';
   errorMessage = '';
   error: { name: string, message: string } = { name: '', message: ''};
 
@@ -21,9 +23,9 @@ export class UserSignupComponent implements OnInit {
 
   }
 
-  onSignUp(data) {
-    console.log('submited', data.value);
-    if (this.validateForm(data.email, data.password)) {
+  onSignUp() {
+    if (this.validateForm(this.email, this.password, this.confirm)) {
+      console.log('submited', this.email +', '+ this.password +', '+ this.confirm);
       this.authService.signUpWithEmail(this.email, this.password)
         .then(() => {
           this.router.navigate(['/home']);
@@ -35,9 +37,12 @@ export class UserSignupComponent implements OnInit {
     }
   }
 
-  validateForm(email:string , password: string): boolean {
+  validateForm(email:string , password: string, confirm: string): boolean {
+    if(!!email && !!password){
+      return true;
+    }
 
-    return true;
+    return false;
   }
 
 }

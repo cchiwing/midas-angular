@@ -20,13 +20,6 @@ export class UserLoginComponent implements OnInit {
 
   ngOnInit() { }
 
-  // checkAuth(): boolean {
-  //   if(this.authService.currentUser) {
-  //     // this.router.navigate(['/home']);
-  //   }
-  //   return this.authService.currentUser;
-  // }
-
   onSigninEmail() {
     console.log('login submit', this.email +' | '+ this.password)
     if(this.validateForm(this.email, this.password)) {

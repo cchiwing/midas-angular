@@ -1,6 +1,6 @@
 
 
-<div class="container">
+<!-- <div class="container">
   <h1>Sign-up Form</h1>
 
   <p *ngIf="errorMessage.length > 0" class="text-danger">
@@ -11,7 +11,7 @@
     {{error.message}}
   </p>
   
-  <form #formData='ngForm' (ngSubmit)="onSignUp(formData)">  
+  <form #formData='ngForm' (ngSubmit)="onSignUp()">  
     <div class="form-group">
       <label for="email">Email</label>
       <input type="email" class="form-control" id="email" name="email" required [(ngModel)]="email">
@@ -24,4 +24,29 @@
   
     <button type="submit" class="btn btn-success">Register</button>
   </form>
-</div>
+</div> -->
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title><h1>Signup</h1></mat-card-title>
+  </mat-card-header>
+
+  <form class="form-container" (ngSubmit)="onSignUp()">
+    <mat-form-field>
+      <input matInput placeholder="Enter your email" name="email" [(ngModel)]="email" required>
+      <mat-error *ngIf="email.invalid">{{getErrorMessage()</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Enter your password" name="password" [(ngModel)]="password" [type]="hidepw ? 'password' : 'text'" required>
+      <mat-icon matSuffix (click)="hidepw = !hidepw">{{hidepw ? 'visibility' : 'visibility_off'}}</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Confirm your password" name="confirm" [(ngModel)]="confirm" [type]="hidepw ? 'password' : 'text'" required>
+      <mat-icon matSuffix (click)="hidepw = !hidepw">{{hidepw ? 'visibility' : 'visibility_off'}}</mat-icon>
+    </mat-form-field>
+
+    <button mat-raised-button type="submit" class="btn btn-success" color="accent">Sign-up</button>
+  </form>
+</mat-card>
