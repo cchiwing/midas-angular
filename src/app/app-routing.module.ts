@@ -6,16 +6,17 @@ import { UserProfileComponent } from './users/user-profile/user-profile.componen
 import { HomeComponent } from './home/home.component';
 import { UserSignupComponent } from './users/user-signup/user-signup.component';
 import { OrderListComponent } from './order/order-list/order-list.component';
+import { AuthGuard } from './core/auth.guard';
 
 const routes : Routes =  [
-  {path:'', redirectTo:'login', pathMatch:'full'},
-  {path:'signup', component: UserSignupComponent},
+  {path:'', redirectTo:'home', pathMatch:'full'}, 
   {path:'login', component: UserLoginComponent},
-  {path:'user', component: UserProfileComponent},
-  {path:'home', component: HomeComponent},
-  {path:'orderlist', component: OrderListComponent},
+  {path:'signup', component: UserSignupComponent, canActivate: [AuthGuard] },
+  {path:'user', component: UserProfileComponent, canActivate: [AuthGuard] },
+  {path:'home', component: HomeComponent, canActivate: [AuthGuard] },
+  {path:'orderlist', component: OrderListComponent, canActivate: [AuthGuard] },
   
-  {path:'**', redirectTo:'login', pathMatch:'full'}
+  {path:'**', redirectTo:'home', pathMatch:'full'}
 ];
 
 @NgModule({

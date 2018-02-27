@@ -1,14 +1,13 @@
-<p>
-  User Profile Page
-</p>
 
-<div *ngIf="auth.authState else showMessage">
+<h4>User Profile</h4>
+
+<div *ngIf="auth.authenticated else showMessage">
   <h5>User Information</h5>
   <h4>
     <strong>UID:</strong> {{ auth.currentUserId }}
   </h4>
   <h4>
-    <strong>Email:</strong> {{ auth.currentUserName }}
+    <strong>Email:</strong> {{ auth.currentUserEmailName }}
   </h4>
 </div>
 

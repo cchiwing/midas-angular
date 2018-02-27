@@ -13,19 +13,12 @@ import { AuthService } from './core/auth.service';
 
 export class AppComponent {
 
-  constructor(public authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) { }
   
   logout() {
     this.authService.signOut().then(() => {
       this.router.navigate(['']);
+      console.log('app com:', 'user logout');
     });
   }  
-  
-  // open() {
-  //   this.sidenav.open();
-  // }
-
-  // close(reason: string) {
-  //   this.sidenav.close();
-  // }
 }

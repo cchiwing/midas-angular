@@ -15,7 +15,7 @@ export class UserSignupComponent implements OnInit {
   errorMessage = '';
   error: { name: string, message: string } = { name: '', message: ''};
 
-  constructor( public authService: AuthService, private router: Router) { }
+  constructor( private authService: AuthService, private router: Router) { }
 
   ngOnInit() { 
 
@@ -30,7 +30,6 @@ export class UserSignupComponent implements OnInit {
           console.log('onSignUp - success', this.authService.currentUserId);
         }).catch(_error => {
           this.error = _error;
-          this.router.navigate(['/']);
           console.log('onSignUp - error', _error);
         });
     }

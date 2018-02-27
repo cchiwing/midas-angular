@@ -16,16 +16,16 @@ export class UserLoginComponent implements OnInit {
   errorMessage = '';
   error: { name: string, message: string } = { name: '', message: ''};
 
-  constructor( public authService: AuthService, private router: Router) { }
+  constructor( private authService: AuthService, private router: Router) { }
 
   ngOnInit() { }
 
-  checkAuth(): boolean {
-    if(this.authService.currentUser) {
-      this.router.navigate(['/home']);
-    }
-    return this.authService.currentUser;
-  }
+  // checkAuth(): boolean {
+  //   if(this.authService.currentUser) {
+  //     // this.router.navigate(['/home']);
+  //   }
+  //   return this.authService.currentUser;
+  // }
 
   onSigninEmail() {
     console.log('login submit', this.email +' | '+ this.password)

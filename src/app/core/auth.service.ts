@@ -1,43 +1,38 @@
 import { Injectable } from '@angular/core';
-import { Router } from "@angular/router";
 import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase } from 'angularfire2/database';
+import * as firebase from 'firebase/app';
 
 @Injectable()
 export class AuthService {
 
-  private authState: any = null;
+  private _user: any = null;
 
-  constructor(private af: AngularFireAuth, private router: Router) { 
-    this.af.authState.subscribe((auth) => {
-      this.authState = auth;
-    });
+  constructor(public af: AngularFireAuth) { 
+    af.authState.subscribe(user => this._user = user);
   }
   
   // Returns true if user is logged in
   get authenticated(): boolean {
-    return this.authState !== null;
+    return this._user !== null;
   }
-
-  // get isUserAnonymousLoggedIn(): boolean {
-  //   return this.authenticated ? this.authState.isAnonymous : false;
-  // }
 
   // Returns current user UID
   get currentUserId(): string {
-    return this.authenticated ? this.authState.uid : '';
+    return this.authenticated ? this._user.uid : '';
   }
 
-  get currentUserName(): string {
-    return this.authenticated ? this.authState.email : '';
+  get currentUserEmail(): string {
+    return this.authenticated ? this._user.email : '';
   }
 
   get currentUserEmailName(): string {
-    return this.authenticated ? (this.authState.email).split('@')[0] : '';
+    return this.authenticated ? (this._user.email).split('@')[0] : '';
   }
 
   // Returns current user
   get currentUser(): any {
-    return this.authenticated ? this.authState : null;
+    return this.authenticated ? this._user : null;
   }
 
   // get isUserEmailLoggedIn(): boolean {
@@ -46,7 +41,7 @@ export class AuthService {
 
   signinWithEmail(email: string, password: string) {
     return this.af.auth.signInWithEmailAndPassword(email, password)
-      .then(user => { this.authState = user; })
+      .then(user => { this._user = user; })
       .catch( error => { console.log(error); throw error;});
   }
 
