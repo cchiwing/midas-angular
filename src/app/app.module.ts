@@ -8,9 +8,11 @@ import { environment } from '../environments/environment';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 
-import { AuthService } from './core/auth.service';
 import { AuthGuard } from './core/auth.guard';
+import { AuthService } from './core/auth.service';
+import { OrderService } from './core/order.service';
 
 import { AppComponent } from './app.component';
 import { UserLoginComponent } from './users/user-login/user-login.component';
@@ -39,9 +41,10 @@ import { OrderFormComponent } from './order/order-form/order-form.component';
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
+    AngularFireDatabaseModule,
     AppRoutingModule
   ],
-  providers: [ AuthService, AuthGuard ],
+  providers: [ AuthService, AuthGuard, OrderService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

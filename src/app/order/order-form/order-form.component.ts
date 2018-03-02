@@ -5,6 +5,7 @@ import { startWith } from 'rxjs/operators/startWith';
 import { map } from 'rxjs/operators/map';
 import { Order } from '../../models/order';
 import { AuthService } from '../../core/auth.service';
+import { OrderService } from '../../core/order.service';
 
 export class User {
   constructor(public name: string) { }
@@ -34,7 +35,7 @@ export class OrderFormComponent implements OnInit {
   remark = '';
   items = '';
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService, private orderService: OrderService) { }
 
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges
@@ -61,13 +62,13 @@ export class OrderFormComponent implements OnInit {
   onSubmit(): void{
     try {
       const order = new Order({
-        clientName: this.client,
+        client: this.client,
         remark: this.remark,
         items: this.items,
         timestamp: new Date().getTime(),
         authorKey: this.auth.currentUserId
       });
-      console.log('Submit successed', order);
+      this.orderService.add(order);
     }catch (e){
       console.log('Submit failed', e);
     }
