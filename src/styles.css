@@ -5,3 +5,8 @@
 body {
   margin: 0;
 }
+
+/* TAB - HEADER LESS */
+.header-less-tabs .mat-tab-group .mat-tab-header {
+  display: none;
+}

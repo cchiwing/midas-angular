@@ -10,6 +10,12 @@
 
 mat-toolbar {
     top:0;
+    max-height: 60px;
+}
+
+.mat-toolbar-multiple-rows {
+    top: 0;
+    min-height: 60px;
 }
 
 /* SIDE NAV  */
@@ -65,5 +71,5 @@ mat-sidenav {
     bottom:0;
     left:0;
     right:0;
-    top:64px;
+    top:60px;
 }

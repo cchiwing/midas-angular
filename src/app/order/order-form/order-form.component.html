@@ -1,3 +1,51 @@
-<p>
-  order-form works!
-</p>
+
+<mat-button-toggle-group #group="matButtonToggleGroup">
+  <mat-button-toggle (click)="page=0;">
+    <mat-icon class="nav-icon">people</mat-icon>
+    <span class="item-spacer"></span>Client
+  </mat-button-toggle>
+  <mat-button-toggle (click)="page=1;">
+    <mat-icon class="nav-icon">list </mat-icon>
+    <span class="item-spacer"></span>Items
+  </mat-button-toggle>
+</mat-button-toggle-group>
+
+<mat-card>
+  <div class="header-less-tabs">
+      <mat-tab-group #tab selectedIndex={{page}}>
+          <mat-tab label="Client">
+            <div class="client-form">
+                <mat-form-field class="example-full-width">
+                  <input matInput name="client" [(ngModel)]="client" placeholder="Client" [formControl]="myControl" [matAutocomplete]="auto" required>
+                  <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption [displayWith]="displayFn">
+                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                      {{ option.name }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+                <mat-form-field>
+                  <textarea  matInput placeholder="Remark" name="remark" [(ngModel)]="remark"></textarea>
+                </mat-form-field>
+            </div>
+          </mat-tab>
+          <mat-tab label="Item">
+            <div class="client-form">
+              <mat-form-field>
+                <input  matInput placeholder="Item" name="items" [(ngModel)]="items" required>
+              </mat-form-field>
+          </div> 
+          </mat-tab>
+        </mat-tab-group>
+  </div>
+</mat-card>
+
+<div class="stick-buttom">
+  <div class="button-row">
+    <button mat-button (click)="onCancel()">
+      Cancel
+    </button>
+    <button mat-button color="accent" (click)="onSubmit()">
+      Save
+    </button>
+  </div>
+</div>

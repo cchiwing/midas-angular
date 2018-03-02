@@ -57,7 +57,6 @@ export class AuthService {
 
   signOut() {
     return this.af.auth.signOut().then(() => {
-      
       console.log('auth.services : sign-out sucess');
     });
   }

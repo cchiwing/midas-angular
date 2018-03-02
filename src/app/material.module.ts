@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatButtonModule, MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule, MatCardModule } from '@angular/material';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatDividerModule } from '@angular/material/divider';
+import { MatButtonModule, MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule, 
+    MatCardModule, MatButtonToggleModule, MatTabsModule, MatAutocompleteModule,
+    MatSelectModule, MatFormFieldModule, MatInputModule, MatDividerModule } from '@angular/material';
 
 @NgModule({
     imports: [
@@ -14,7 +13,11 @@ import { MatDividerModule } from '@angular/material/divider';
         MatListModule,
         MatCardModule,
         MatFormFieldModule,
-        MatInputModule
+        MatInputModule,
+        MatButtonToggleModule,
+        MatTabsModule, 
+        MatAutocompleteModule,
+        MatSelectModule
     ],
     exports: [
         MatButtonModule,
@@ -24,7 +27,11 @@ import { MatDividerModule } from '@angular/material/divider';
         MatListModule,
         MatCardModule,
         MatFormFieldModule,
-        MatInputModule
+        MatInputModule,
+        MatButtonToggleModule,
+        MatTabsModule, 
+        MatAutocompleteModule,
+        MatSelectModule
     ],
 })
 
