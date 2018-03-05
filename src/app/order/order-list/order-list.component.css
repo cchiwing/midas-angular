@@ -18,4 +18,9 @@
 
 mat-card { 
     margin: 12px 4px;
+    padding: 0 12px;
+}
+
+.item-container {
+    padding: 12px 0 12px 0;
 }

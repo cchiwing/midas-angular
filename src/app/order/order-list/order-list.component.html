@@ -1,45 +1,19 @@
 
 <div class="container">
   <mat-card>
-      <p>
-        order-list works!
-      </p>
+    <div *ngFor="let order of orderService.ordersStream | async">
+      <div class="item-container">
+          AuthorKey : <input type="text" #updatetext [value]="order.authorKey" /> <br>
+          Client : <input type="text" #updatetext [value]="order.timestamp" /> <br>
+          Remark : {{ !!order.remark ? order.remark : 'null'}} <br>
+        <button (click)="orderService.update(order.key, updatetext.value)" disabled>Update</button>
+        <button (click)="orderService.delete(order.key)">Delete</button>
+      </div>
+      <mat-divider></mat-divider>
+    </div>
+      
   </mat-card>
-  <mat-card>
-      <p>
-        order-list works!
-      </p>
-  </mat-card>
-  <mat-card>
-      <p>
-        order-list works!
-      </p>
-  </mat-card>
-  <mat-card>
-      <p>
-        order-list works!
-      </p>
-  </mat-card>
-  <mat-card>
-      <p>
-        order-list works!
-      </p>
-  </mat-card>
-  <mat-card>
-      <p>
-        order-list works!
-      </p>
-  </mat-card>
-  <mat-card>
-      <p>
-        order-list works!
-      </p>
-  </mat-card>
-  <mat-card>
-      <p>
-        order-list works!
-      </p>
-  </mat-card>
+
 </div>
 
 <div class="stick-buttom">
