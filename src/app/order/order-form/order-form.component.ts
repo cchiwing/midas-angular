@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { startWith } from 'rxjs/operators/startWith';
 import { map } from 'rxjs/operators/map';
 import { Order } from '../../models/order';
+import { Customer } from '../../models/customer';
 import { AuthService } from '../../core/auth.service';
 import { OrderService } from '../../core/order.service';
-
-export class User {
-  constructor(public name: string) { }
-}
+import { CustomerService } from '../../core/customer.service';
+// import { getLocaleDateFormat } from '@angular/common';
 
 
 @Component({
@@ -20,54 +19,67 @@ export class User {
 
 export class OrderFormComponent implements OnInit {
 
-  page = 0;
-  myControl = new FormControl();
+  tabPage = 0;
 
-  options = [
-    new User('Mary'),
-    new User('Shelley'),
-    new User('Igor')
-  ];
+  // customer select form //
+  selectedCustomer;
+  searchTerm = new EventEmitter<string>();
+  customers = [];
+  customerFiltered = [];
+  customerLoading = false;
 
-  filteredOptions: Observable<User[]>;
-
-  client = '';
+  // order info //
+  invoiceNum = '';
+  timestamp = new Date().getTime();
+  date = new FormControl(new Date());
+  customer = '';
   remark = '';
-  items = '';
+  items = '';  
 
-  constructor(private auth: AuthService, private orderService: OrderService) { }
+  constructor(private auth: AuthService, private orderService: OrderService, private customerService: CustomerService) {  }
 
   ngOnInit() {
-    this.filteredOptions = this.myControl.valueChanges
-      .pipe(
-        startWith<string | User>(''),
-        map(value => typeof value === 'string' ? value : value.name),
-        map(name => name ? this.filter(name) : this.options.slice())
-      );
+    this.customerService.customerStream.subscribe(src => {
+      this.customers = src;
+      this.customerFiltered = src;
+      this.customerLoading = false;
+
+    });    
+    this.searchTerm.subscribe(term => this.customSearch(term));
   }
 
-  filter(name: string): User[] {
-    return this.options.filter(option =>
-      option.name.toLowerCase().indexOf(name.toLowerCase()) === 0);
-  }
-
-  displayFn(user?: User): string | undefined {
-    return user ? user.name : undefined;
-  }
+  private customSearch(searchTerm) {
+    if(searchTerm){
+      const term = searchTerm.toUpperCase();
+      this.customers.map(item => item.searchkey = item.name + item.tel + item.addr);
+      this.customerFiltered = this.customers.filter(item => item.searchkey.toUpperCase().indexOf(term) > -1);
+      // this.customerFiltered = this.customers.filter(item => item.name.toUpperCase().indexOf(term) > -1 || item.tel.indexOf(term) > -1 || item.addr.toUpperCase().indexOf(term) > -1);
+    }else{
+      this.customerFiltered = this.customers;
+    }
+}
 
   onCancel(): void {
-    console.log('order-form result: ', this.client +', '+ this.remark +', '+ this.items);
+    console.log('order-form result: ', this.customer +', '+ this.remark +', '+ this.items);
   }
 
   onSubmit(): void{
     try {
+      // const order = new Order({
+      //   client: this.client,
+      //   remark: this.remark,
+      //   items: this.items,
+      //   timestamp: this.timestamp,
+      //   authorKey: this.auth.currentUserId
+      // });
       const order = new Order({
-        client: this.client,
-        remark: this.remark,
-        items: this.items,
-        timestamp: new Date().getTime(),
-        authorKey: this.auth.currentUserId
+        uid: this.auth.currentUserId,
+        customer: new Customer ({name: 'Mary', addr: 'Hong Kong', tel: '23174567'}),
+        date: new Date().getTime()
       });
+
+      console.log(order);
+      
       this.orderService.add(order);
     }catch (e){
       console.log('Submit failed', e);
