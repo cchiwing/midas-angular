@@ -34,7 +34,6 @@
   <form class="form-container" (ngSubmit)="onSignUp()">
     <mat-form-field>
       <input matInput placeholder="Enter your email" name="email" [(ngModel)]="email" required>
-      <mat-error *ngIf="email.invalid">{{getErrorMessage()</mat-error>
     </mat-form-field>
 
     <mat-form-field>

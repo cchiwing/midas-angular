@@ -35,14 +35,10 @@ export class AuthService {
     return this.authenticated ? this._user : null;
   }
 
-  // get isUserEmailLoggedIn(): boolean {
-  //   return (this.authenticated) && (!this.isUserAnonymousLoggedIn) ? true : false;
-  // }
-
   signinWithEmail(email: string, password: string) {
     return this.af.auth.signInWithEmailAndPassword(email, password)
       .then(user => { this._user = user; })
-      .catch( error => { console.log(error); throw error;});
+      .catch( error => { throw error;});
   }
 
   signUpWithEmail(email: string, password:string) {
@@ -51,7 +47,7 @@ export class AuthService {
       console.log('auth.services : signup sucess', user);
     })
     .catch(error => {
-      console.log(error); throw error;
+      throw error;
     });
   }
 

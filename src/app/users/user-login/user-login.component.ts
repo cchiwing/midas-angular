@@ -14,27 +14,19 @@ export class UserLoginComponent implements OnInit {
   email = '';
   password = '';
   errorMessage = '';
-  error: { name: string, message: string } = { name: '', message: ''};
 
   constructor( private authService: AuthService, private router: Router) { }
 
   ngOnInit() { }
 
   onSigninEmail() {
-    console.log('login submit', this.email +' | '+ this.password)
-    if(this.validateForm(this.email, this.password)) {
-      this.authService.signinWithEmail(this.email, this.password)
-      .then(() => this.router.navigate(['/home']))
+    console.log('login submit', this.email +' | '+ this.password);
+    this.authService.signinWithEmail(this.email, this.password)
+      .then(() => this.router.navigate(['home']))
       .catch(_error => {
-        this.error = _error;
-        this.router.navigate(['/']);
-      })
-    }
-  }
-
-  validateForm(email:string , password: string): boolean {
-
-    return true;
+        this.errorMessage = 'Please check your input.';
+        console.log('there is a error', _error);
+      });
   }
 
 }
