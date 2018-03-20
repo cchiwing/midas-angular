@@ -12,11 +12,11 @@ import { OrderFormComponent } from './order/order-form/order-form.component';
 const routes : Routes =  [
   {path:'', redirectTo:'home', pathMatch:'full'}, 
   {path:'login', component: UserLoginComponent},
-  {path:'signup', component: UserSignupComponent, canActivate: [AuthGuard] },
-  {path:'user', component: UserProfileComponent, canActivate: [AuthGuard] },
-  {path:'home', component: HomeComponent, canActivate: [AuthGuard] },
-  {path:'orderlist', component: OrderListComponent, canActivate: [AuthGuard] },
-  {path:'orderform', component: OrderFormComponent, canActivate: [AuthGuard] },
+  {path:'signup', component: UserSignupComponent, canActivate: [AuthGuard], data: {title:"Signup", showNavbar: true} },
+  {path:'user', component: UserProfileComponent, canActivate: [AuthGuard], data: {title:"User", showNavbar: true} },
+  {path:'home', component: HomeComponent, canActivate: [AuthGuard], data: {title:"Home", showNavbar: true} },
+  {path:'orderlist', component: OrderListComponent, canActivate: [AuthGuard], data: {title:"List", showNavbar: true} },
+  {path:'orderform', component: OrderFormComponent, canActivate: [AuthGuard], data: {title:"New Order", showNavbar: false} },
   
   {path:'**', redirectTo:'home', pathMatch:'full'}
 ];

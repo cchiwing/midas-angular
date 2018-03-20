@@ -1,4 +1,10 @@
 /* TOOLBAR */
+
+.nav-bar {
+    top:0;
+    max-height: 50px;
+}
+
 .nav-icon {
     margin: 0 4px;
     padding: 0 0px;
@@ -8,18 +14,18 @@
   flex: 1 1 auto;
 }
 
-mat-toolbar {
-    top:0;
-    max-height: 60px;
+@media (max-width: 599px){
+    .toolbar-spacer {
+        height: 56px;
+    }
 }
 
-.mat-toolbar-multiple-rows {
-    top: 0;
-    min-height: 60px;
+.toolbar-spacer {
+    height: 64px;
 }
 
 /* SIDE NAV  */
-.sidenav-container {
+mat-sidenav-container {
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -34,21 +40,17 @@ mat-sidenav {
     background-color: whitesmoke;
 }
 
-.sidenav-btn {
-    margin: 4px 0 4px 0;
-    width: 100%;
-}
-
 .profole-container {
-    padding: 20px 4px 8px 4px;
     text-align: center;
     background-color: #3F51B5;
     color: white;
-}
-
-.mat-sidenav > mat-card {
     margin-bottom: 2px;
     padding: 8px 4px 8px 4px;
+}
+
+.sidenav-btn {
+    margin: 4px 0 4px 0;
+    width: 100%;
 }
 
 .item-container > button {
@@ -60,16 +62,12 @@ mat-sidenav {
     margin-left: 8px;
 }
 
-.stick-bottom {
-    width: 100%;
-    position: absolute;
-    bottom:0;
-}
+
+/* Content view */
 
 .inner-content-view {
-    position: absolute;
+    position: fixed;
     bottom:0;
     left:0;
     right:0;
-    top:60px;
 }

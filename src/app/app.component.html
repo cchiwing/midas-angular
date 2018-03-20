@@ -1,23 +1,21 @@
-<mat-sidenav-container class="sidenav-container" (backdropClick)="sidenav.close()" >
-  <mat-toolbar color="primary">
+<mat-sidenav-container class="sidenav-container" (backdropClick)="sidenav.close()" *ngIf="showNavbar; else noNav">
+
+  <mat-toolbar color="primary" class="nav-bar">
     <mat-toolbar-row>
       <button mat-icon-button (click)="sidenav.toggle()" *ngIf="authService.currentUser">
           <mat-icon class="nav-icon">menu</mat-icon>
       </button>
-      
-      <span>Midas Panel</span>
+      <span>Midas Panel - {{title}}</span>
       <span class="nav-spacer"></span>
-      <mat-icon class="nav-icon">delete</mat-icon>
-      <mat-icon class="nav-icon">more_vert</mat-icon>
+      <!-- <mat-icon class="nav-icon">more_vert</mat-icon> -->
     </mat-toolbar-row>
   </mat-toolbar>
 
-  <div class="inner-content-view">
+  <div class="inner-content-view" layout="row" layout-margin>
     <router-outlet></router-outlet>
   </div>
       
   <mat-sidenav #sidenav>
-
     <mat-card class="profole-container" color="primary">
       <button class="sidenav-btn" mat-button (click)="sidenav.toggle()" [routerLink]="['/user']">
         <mat-icon>account_circle</mat-icon><br>
@@ -44,9 +42,9 @@
         <span class="item-spacer"></span>
         Work</button>
     </div>
-
-    <!-- <div class="stick-bottom">
-      <button class="sidenav-btn" mat-button (click)="logout()" color="accent">Logout</button>
-    </div> -->
   </mat-sidenav>
 </mat-sidenav-container>
+
+<ng-template #noNav>
+  <router-outlet></router-outlet>
+</ng-template>
