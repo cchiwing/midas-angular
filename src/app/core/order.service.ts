@@ -5,38 +5,80 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class OrderService {
-  readonly orderPath = "/orders";
-  private _ordersRef: AngularFireList<any>;
-  private _ordersList: Observable<any[]>;
+  readonly orderPath = "/order";
+  private ref: AngularFireList<Order>;
+  private list: Observable<Order[]>;
+  private index: Observable<any[]>;
 
   constructor(private db: AngularFireDatabase) { 
-    this._ordersRef = this.db.list(this.orderPath);
-    this._ordersList = this._ordersRef.snapshotChanges().map(changes => {
+    this.ref = this.db.list<Order>(this.orderPath);
+    this.list = this.ref.snapshotChanges().map(changes => {
       return changes.map(c => ({ key: c.payload.key, ...c.payload.val()}));
     });
-    // console.log('orderObj: ', this._ordersList);
-    // this._ordersList = db.list('orders');
-    // console.log('orderObj: ', this._ordersList);
+
+    this.index = this.ref.snapshotChanges().map(changes => {
+      return changes.map(c => ({ key: c.payload.val().date, value: c.payload.val().invoiceNum}));
+    });
+
+    this.index.subscribe(item => console.log('item', item));
   }
 
   get ordersStream(): Observable<any[]> {
-    return this._ordersList;
+    return this.list;
   }
 
+  order(){
+    this.list
+       .map(epics => epics.filter(epic => epic.$key === '-L6p9sbtTqlQ6kEzzlcX')).subscribe(res => console.log('res: ', res));
+  }
+
+  orderByKey(key: string): any[]{
+    var result: any[] = null;
+    this.list
+       .map(orders => orders.filter(order => order.$key === key)).subscribe(res => result = res);
+    return result;
+  }
+
+  // Function //
+
   add(order: Order) {
-    this._ordersRef.push(order);
-    console.log('Pushing order', order);
+    var invoiceNum: string;
+    var invoiceDate = order.date;
+    this.db.object(`orderIndex/${invoiceDate}/total`).query.ref.transaction(total => {
+      total = total === null? 1 : (Number(total) +1);
+      total = +total>9? total: '0'+total; 
+      invoiceNum = invoiceDate + total;
+      console.log('new total', total);
+      return total;
+    }).then(() => {
+      order.invoiceNum = invoiceNum;
+      console.log('new total', order);
+      // this.ref.push(order);
+      this.ref.set(invoiceNum, order);
+    });
   }
 
   update(key: string, order: Order){
-    this._ordersRef.update(key, order);
+    this.ref.update(key, order);
   }
 
+  // updateName(key:string, newName: string) {
+  //   this.ref.update(key, {customer:{name:newName}});
+  // }
+
   delete(key: string) {
-    this._ordersRef.remove(key);
+    this.ref.remove(key);
   }
 
   clearAll(key: string) {
-    this._ordersRef.remove();
+    this.ref.remove();
   }
+
+  // Tools //
+
+  formatDate(date: Date): string{
+    return date.toLocaleDateString('ja-JP', {year: '2-digit', month: '2-digit', day: '2-digit' }).split('/').join('');
+  }
+
+
 }
