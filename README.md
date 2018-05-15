@@ -25,3 +25,22 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## New Page
+
+1. Generate component
+``ng g c <name> --module app``
+or if a folder needed use..
+``ng g c /<folder>/<component name> --module app``
+
+2. Add path
+at ``app\app-routing.module.ts`` 
+
+``import { <your component> } from './<your path>';``
+``const routes : Routes =  [
+  {path:'<route link>', component: <component name>, canActivate: [AuthGuard], data: {...} },
+
+  
+  {path:'**', redirectTo:'home', pathMatch:'full'}
+];``
+
