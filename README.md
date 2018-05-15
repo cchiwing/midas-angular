@@ -29,11 +29,13 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## New Page
 
 1. Generate component
+
 ``ng g c <name> --module app``
 or if a folder needed use..
 ``ng g c /<folder>/<component name> --module app``
 
 2. Add path
+
 at ``app\app-routing.module.ts`` 
 
 ``import { <your component> } from './<your path>';``
