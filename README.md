@@ -36,13 +36,17 @@ or if a folder needed use..
 
 2. Add path
 
-at ``app\app-routing.module.ts`` 
+at `app\app-routing.module.ts`
 
-``import { <your component> } from './<your path>';``
-```const routes : Routes =  [
+`import { <your component> } from './<your path>';`
+
+```
+const routes : Routes =  [
   {path:'<route link>', component: <component name>, canActivate: [AuthGuard], data: {...} },
   {path:'**', redirectTo:'home', pathMatch:'full'}
-];```
+];
+```
+
 
 ## New Model (class)
 
