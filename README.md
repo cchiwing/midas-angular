@@ -39,10 +39,12 @@ or if a folder needed use..
 at ``app\app-routing.module.ts`` 
 
 ``import { <your component> } from './<your path>';``
-``const routes : Routes =  [
+```const routes : Routes =  [
   {path:'<route link>', component: <component name>, canActivate: [AuthGuard], data: {...} },
-
-  
   {path:'**', redirectTo:'home', pathMatch:'full'}
-];``
+];```
 
+## New Model (class)
+
+1. `cd`to the target folder
+2. ng g class <name>
