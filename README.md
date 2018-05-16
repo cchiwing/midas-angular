@@ -51,4 +51,6 @@ const routes : Routes =  [
 ## New Model (class)
 
 1. `cd`to the target folder
-2. ng g class <name>
+2. `ng g class <name>`
+
+
