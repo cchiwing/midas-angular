@@ -1,23 +1,12 @@
-
-<div class="container">
-  <mat-card>
-    <div *ngFor="let order of orderService.ordersStream | async">
-      <div class="item-container">
-          AuthorKey : <input type="text" #updatetext [value]="order.authorKey" /> <br>
-          Client : <input type="text" #updatetext [value]="order.timestamp" /> <br>
-          Remark : {{ !!order.remark ? order.remark : 'null'}} <br>
-        <button (click)="orderService.update(order.key, updatetext.value)" disabled>Update</button>
-        <button (click)="orderService.delete(order.key)">Delete</button>
-      </div>
-      <mat-divider></mat-divider>
+<mat-card>
+  <div *ngFor="let order of orderService.ordersStream | async ">
+    <div class="item-container">
+      <p mat-line>Invoice Num : {{ order.invoiceNum }} </p>
+      <p mat-line>Client : {{ !!order.customer.name ? order.customer.name : 'Walkin'}} </p>
+      Date : {{ !!order.date ? order.date : 'null'}}
+      <br>
+      <button mat-raised-button (click)="orderService.delete(order.key)">Delete</button>
     </div>
-      
-  </mat-card>
-
-</div>
-
-<div class="stick-buttom">
-  <button mat-raised-button color="accent" [routerLink]="['/orderform']">
-    New Order
-  </button>
-</div>
+    <mat-divider></mat-divider>
+  </div>
+</mat-card>

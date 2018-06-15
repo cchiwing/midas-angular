@@ -1,81 +1,89 @@
+<div class="page-wapper">
+  <mat-button-toggle-group #group="matButtonToggleGroup" value="customer" class="header">
+    <mat-button-toggle (click)="tab.selectedIndex=0;" value="customer">
+      <mat-icon class="nav-icon">people</mat-icon>
+      <span class="item-spacer"></span>Customer
+    </mat-button-toggle>
+    <mat-button-toggle (click)="tab.selectedIndex=1;" value="items">
+      <mat-icon class="nav-icon">list </mat-icon>
+      <span class="item-spacer"></span>Items
+    </mat-button-toggle>
+  </mat-button-toggle-group>
 
-<mat-button-toggle-group #group="matButtonToggleGroup" value="customer">
-  <mat-button-toggle (click)="tab.selectedIndex=0;" value="customer">
-    <mat-icon class="nav-icon">people</mat-icon>
-    <span class="item-spacer"></span>Customer
-  </mat-button-toggle>
-  <mat-button-toggle (click)="tab.selectedIndex=1;" value="items">
-    <mat-icon class="nav-icon">list </mat-icon>
-    <span class="item-spacer"></span>Items
-  </mat-button-toggle>
-</mat-button-toggle-group>
-
-<mat-card>
-  <div class="header-less-tabs">
+  <mat-card>
+    <div class="header-less-tabs">
       <mat-tab-group #tab [selectedIndex]="selectedIndex">
-          <mat-tab label="Customer">
-            <!-- # {{ timestamp | date:"yyyyMMdd"}} -->
-            <div class="customer-form">
-              <mat-form-field>
-                <input matInput [matDatepicker]="picker" placeholder="Date" [value]="date.value" (click)="picker.open()" disabled>
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-              </mat-form-field>
+        <mat-tab label="Customer">
+          <div class="customer-form">
+            <mat-form-field>
+              <input matInput [matDatepicker]="picker" placeholder="Date" [formControl]="date" (click)="picker.open()">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
 
-              <!-- <div *ngIf="customers$.length > 0"> -->
-                <ng-select 
-                          [items]="customerFiltered"
-                          [virtualScroll]="true"
-                          [typeahead]="searchTerm"
-                          appendTo="body"
-                          placeholder="Customer"
-                          (close)="customerFiltered = customers"
-                          [(ngModel)]="selectedCustomer">
-                  <ng-template ng-label-tmp let-item="item">
-                      {{item.name}} <small>- {{item.tel}} - {{item.addr}}</small>
-                  </ng-template>
-                  <ng-template ng-option-tmp let-item="item" let-search="searchTerm">
-                      <b><span [innerHTML]="item.name" [ngOptionHighlight]="search"></span></b> - 
-                      <b><span [innerHTML]="item.tel" [ngOptionHighlight]="search"></span></b> - 
-                      <small><span [innerHTML]="item.addr" [ngOptionHighlight]="search"></span></small>   
-                  </ng-template>
-                </ng-select>
-              <!-- </div> -->
+            <ng-select [items]="customerFiltered" [virtualScroll]="true" [typeahead]="searchTerm" appendTo="body" placeholder="Customer"
+              (close)="customerFiltered = customers" [(ngModel)]="selectedCustomer">
+              <ng-template ng-label-tmp let-item="item">
+                {{item.name}}
+                <small>- {{item.tel}} - {{item.addr}}</small>
+              </ng-template>
+              <ng-template ng-option-tmp let-item="item" let-search="searchTerm">
+                <b>
+                  <span [innerHTML]="item.name" [ngOptionHighlight]="search"></span>
+                </b> -
+                <b>
+                  <span [innerHTML]="item.tel" [ngOptionHighlight]="search"></span>
+                </b> -
+                <small>
+                  <span [innerHTML]="item.addr" [ngOptionHighlight]="search"></span>
+                </small>
+              </ng-template>
+            </ng-select>
 
-              <!-- <mat-form-field class="example-full-width">
-                <input matInput name="customer" [(ngModel)]="customer" placeholder="Customer" [formControl]="orderCtrl" [matAutocomplete]="auto" required>
-                <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption [displayWith]="displayFn">
-                  <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                    <span>{{ option.name }}</span> |
-                    <small>Tel: {{option.tel}}</small> |
-                    <small>addr: {{option.addr}}</small>
-                  </mat-option>
-                </mat-autocomplete>
-              </mat-form-field> -->
+            <mat-form-field>
+              <textarea matInput placeholder="Remark" name="remark" [(ngModel)]="remark"></textarea>
+            </mat-form-field>
+          </div>
 
-              <mat-form-field>
-                <textarea  matInput placeholder="Remark" name="remark" [(ngModel)]="remark"></textarea>
-              </mat-form-field>
-            </div>
-          </mat-tab>
-          <mat-tab label="Item">
-            <div class="customer-form">
-              <mat-form-field>
-                <input  matInput placeholder="Item" name="items" [(ngModel)]="items" required>
-              </mat-form-field>
-          </div> 
-          </mat-tab>
-        </mat-tab-group>
+        </mat-tab>
+        <mat-tab label="Item">
+
+          <ng-select [items]="customerFiltered" [virtualScroll]="true" [typeahead]="searchTerm" appendTo="body" placeholder="Select item(s)"
+            (close)="customerFiltered = customers" [(ngModel)]="selectedCustomer">
+            <ng-template ng-label-tmp let-item="item">
+              {{item.name}}
+              <small>- {{item.tel}} - {{item.addr}}</small>
+            </ng-template>
+            <ng-template ng-option-tmp let-item="item" let-search="searchTerm">
+              <b>
+                <span [innerHTML]="item.name" [ngOptionHighlight]="search"></span>
+              </b> -
+              <b>
+                <span [innerHTML]="item.tel" [ngOptionHighlight]="search"></span>
+              </b> -
+              <small>
+                <span [innerHTML]="item.addr" [ngOptionHighlight]="search"></span>
+              </small>
+            </ng-template>
+          </ng-select>
+          <button mat-icon-button>
+            <mat-icon class="nav-icon">add</mat-icon>
+          </button>
+
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </mat-card>
+
+  <div class="footer">
+    <div class="button-row">
+      <button mat-button [routerLink]="['/orderlist']" (click)="onCancel()">
+        Cancel
+      </button>
+      <button mat-button color="accent" (click)="onSubmit()">
+        Save
+      </button>
+    </div>
   </div>
-</mat-card>
 
-<div class="stick-buttom">
-  <div class="button-row">
-    <button mat-button (click)="customerService.add({name:'Ken', tel:'23198989', addr:'tai o'})">
-      Cancel
-    </button>
-    <button mat-button color="accent" (click)="onSubmit()">
-      Save
-    </button>
-  </div>
 </div>

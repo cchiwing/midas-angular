@@ -1,0 +1,79 @@
+<div class="container">
+  <mat-card>
+    <h3>Search:</h3>
+    <form class="form-inline">
+      <div class="form-group">
+        <input type="search" class="form-control" placeholder="search keyword" value="" [formControl]="searchField" />
+      </div>
+    </form>
+  </mat-card>
+  <mat-card>
+    <h3>New Product:</h3>
+    <table>
+      <tr>
+        <th>key </th>
+        <th>name </th>
+        <th>spec </th>
+        <th>unit </th>
+        <th>price</th>
+        <th>tag </th>
+        <th>action</th>
+      </tr>
+      <tr>
+        <td>
+          <input type="text" [(ngModel)]="newProduct.key" disabled/> </td>
+        <td>
+          <input type="text" [(ngModel)]="newProduct.name" /> </td>
+        <td>
+          <input type="text" [(ngModel)]="newProduct.spec" /> </td>
+        <td>
+          <input type="text" [(ngModel)]="newProduct.unit" /> </td>
+        <td>
+          <input type="number" [(ngModel)]="newProduct.price" /> </td>
+        <td>
+          <input type="text" [(ngModel)]="newProduct.tag" /> </td>
+        <td>
+          <button mat-raised-button (click)="productService.add(newProduct)">Add</button>
+        </td>
+      </tr>
+    </table>
+  </mat-card>
+  <mat-card>
+    <h3>Item List:</h3>
+    <div class="text-center">
+      <p class="lead" *ngIf="loading">Loading...</p>
+    </div>
+    <table>
+      <tr>
+        <th>key </th>
+        <th>name </th>
+        <th>spec </th>
+        <th>unit </th>
+        <th>price</th>
+        <th>tag </th>
+        <th>action</th>
+      </tr>
+      <tr *ngFor="let item of productList | async">
+        <td>
+          <input type="text" #updatetext [value]="item.key" disabled/> </td>
+        <td>
+          <input type="text" #updatetext [value]="item.name" /> </td>
+        <td>
+          <input type="text" #updatetext [value]="item.spec" /> </td>
+        <td>
+          <input type="text" #updatetext [value]="item.unit" /> </td>
+        <td>
+          <input type="text" #updatetext [value]="item.price" /> </td>
+        <td>
+          <input type="text" #updatetext [value]="item.tag" /> </td>
+        <td>
+          <button mat-raised-button  (click)="productService.delete(item.key)">Delete</button>
+        </td>
+      </tr>
+    </table>
+  </mat-card>
+
+  <mat-card>
+    <button mat-raised-button color="warn" (click)="productService.deleteAll()">Delete All</button>
+  </mat-card>
+</div>

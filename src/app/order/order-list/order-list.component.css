@@ -9,7 +9,6 @@
 .container {
     width: 100%;
     overflow: auto;
-    position: absolute;
     bottom:46px;
     left:0;
     right:0;

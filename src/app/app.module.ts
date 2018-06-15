@@ -15,6 +15,7 @@ import { AuthGuard } from './core/auth.guard';
 import { AuthService } from './core/auth.service';
 import { OrderService } from './core/order.service';
 import { CustomerService } from './core/customer.service';
+import { ProductService } from './core/product.service';
 
 import { AppComponent } from './app.component';
 import { UserLoginComponent } from './users/user-login/user-login.component';
@@ -23,6 +24,7 @@ import { HomeComponent } from './home/home.component';
 import { UserSignupComponent } from './users/user-signup/user-signup.component';
 import { OrderListComponent } from './order/order-list/order-list.component';
 import { OrderFormComponent } from './order/order-form/order-form.component';
+import { DataProductComponent } from './setting/data-product/data-product.component';
 
 
 @NgModule({
@@ -34,6 +36,7 @@ import { OrderFormComponent } from './order/order-form/order-form.component';
     UserSignupComponent,
     OrderListComponent,
     OrderFormComponent,
+    DataProductComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,7 @@ import { OrderFormComponent } from './order/order-form/order-form.component';
     AppRoutingModule,
     NgSelectModule
   ],
-  providers: [ AuthService, AuthGuard, OrderService, CustomerService ],
+  providers: [ AuthService, AuthGuard, OrderService, CustomerService, ProductService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

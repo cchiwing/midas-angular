@@ -1,0 +1,28 @@
+.screen-wrapper {
+    width:100%;
+    position: absolute;
+    top: 64px;
+    bottom:18px;
+    overflow: scroll;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+.stick-buttom {
+    width: 100%;
+    position: absolute;
+    bottom:0;
+}
+
+.button-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+}
+
+.button-wrapper button {
+    border-radius: 0;
+    flex: 1;
+}

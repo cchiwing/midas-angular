@@ -12,7 +12,7 @@ export class CustomerService {
   constructor(db: AngularFireDatabase) {
     this.ref = db.list(this.customerPath);
     this.snap = this.ref.snapshotChanges().map(changes => {
-      return changes.map(c => new Customer({ key: c.payload.key, ...c.payload.val()}));
+      return changes.map(c => new Customer({ key: c.payload.key, ...c.payload.val() }));
     });
   }
 

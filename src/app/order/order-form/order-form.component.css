@@ -28,15 +28,27 @@ mat-card {
 }
 
 /* OTHER */
+.page-wapper {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+}
 
 .item-spacer {
     margin-left: 10px;
 }
 
-.stick-buttom {
+.footer {
     width: 100%;
-    position: absolute;
+    position: fixed;
     bottom:0;
+}
+
+.header {
+    width:100%;
+    position: fixed;
+    top:0;
 }
 
 .button-row {

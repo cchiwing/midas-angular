@@ -7,12 +7,12 @@ import { Observable } from 'rxjs/Observable';
 export class OrderService {
   readonly orderPath = "/order";
   private ref: AngularFireList<Order>;
-  private list: Observable<Order[]>;
+  private snap: Observable<Order[]>;
   private index: Observable<any[]>;
 
   constructor(private db: AngularFireDatabase) { 
     this.ref = this.db.list<Order>(this.orderPath);
-    this.list = this.ref.snapshotChanges().map(changes => {
+    this.snap = this.ref.snapshotChanges().map(changes => {
       return changes.map(c => ({ key: c.payload.key, ...c.payload.val()}));
     });
 
@@ -20,22 +20,25 @@ export class OrderService {
       return changes.map(c => ({ key: c.payload.val().date, value: c.payload.val().invoiceNum}));
     });
 
-    this.index.subscribe(item => console.log('item', item));
   }
 
-  get ordersStream(): Observable<any[]> {
-    return this.list;
+  get ordersStream(): Observable<Order[]> {
+    return this.snap;
   }
 
   order(){
-    this.list
-       .map(epics => epics.filter(epic => epic.$key === '-L6p9sbtTqlQ6kEzzlcX')).subscribe(res => console.log('res: ', res));
+    this.snap
+       .map(epics => epics
+        .filter(epic => epic.$key === '-L6p9sbtTqlQ6kEzzlcX')
+      ).subscribe(res => console.log('res: ', res));
   }
 
   orderByKey(key: string): any[]{
     var result: any[] = null;
-    this.list
-       .map(orders => orders.filter(order => order.$key === key)).subscribe(res => result = res);
+    this.snap
+       .map(orders => orders
+        .filter(order => order.$key === key)
+      ).subscribe(res => result = res);
     return result;
   }
 
@@ -61,10 +64,6 @@ export class OrderService {
   update(key: string, order: Order){
     this.ref.update(key, order);
   }
-
-  // updateName(key:string, newName: string) {
-  //   this.ref.update(key, {customer:{name:newName}});
-  // }
 
   delete(key: string) {
     this.ref.remove(key);
